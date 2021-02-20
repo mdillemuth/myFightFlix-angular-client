@@ -1,11 +1,11 @@
 import { Component, OnInit, Input } from '@angular/core';
 
-// API Call to backend for registering a new user
+// Backend logic for registering new user
 import { UserRegistrationService } from '../fetch-api-data.service';
-// This import is used to display notifications back to the user
-import { MatSnackBar } from '@angular/material/snack-bar';
-// You'll use this import to close the dialog on success
+// Closes dialog on success
 import { MatDialogRef } from '@angular/material/dialog';
+// Displays notifications
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-user-registration-form',
