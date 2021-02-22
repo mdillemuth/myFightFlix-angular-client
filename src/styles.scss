@@ -36,6 +36,13 @@ $myFightFlix-angular-client-theme: mat-light-theme(
 
 /* You can add global styles to this file, and also import other style files */
 
+// Resets
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 html,
 body {
   height: 100%;
@@ -45,5 +52,20 @@ body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
   min-height: 100vh;
   background-color: #fafafa;
-  padding: 32px;
+  padding: 24px;
+  color: #343a40;
+}
+
+// Tablet
+@media all and (min-width: 768px) {
+  body {
+    padding: 40px;
+  }
+}
+
+// Desktop
+@media all and (min-width: 1440px) {
+  body {
+    padding: 165px;
+  }
 }

@@ -1,0 +1,44 @@
+.movies__container {
+  margin: 0 auto;
+  max-width: 1100px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 10px;
+  align-items: stretch;
+  grid-auto-rows: 520px;
+  grid-auto-flow: dense;
+}
+
+.movie-card__container {
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  .movie-card__title {
+    font-weight: bold;
+    font-size: 30px;
+    letter-spacing: 2px;
+  }
+
+  img {
+    border-radius: 5px;
+    margin: 0 auto;
+    max-width: 75%;
+    height: 300px;
+
+    object-fit: cover;
+    object-position: top;
+  }
+
+  .movie-card__actions-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    button {
+      font-size: 16px;
+      letter-spacing: 1px;
+    }
+  }
+}

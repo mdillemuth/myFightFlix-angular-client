@@ -1,13 +1,20 @@
-<div class="main-page">
-  <h1>Welcome to myFightFlix</h1>
-  <button
-    mat-raised-button
-    (click)="openUserRegistrationDialog()"
-    color="primary"
-  >
-    Sign Up
-  </button>
-  <button mat-raised-button (click)="openUserLoginDialog()" color="primary">
-    Login
-  </button>
+<div class="welcome__container">
+  <div class="welcome__title">
+    <h1>
+      Welcome to
+      <div class="welcome__brand">myFightFlix</div>
+    </h1>
+  </div>
+  <div class="btn-container">
+    <button
+      mat-raised-button
+      (click)="openUserRegistrationDialog()"
+      color="primary"
+    >
+      Sign Up
+    </button>
+    <button mat-raised-button (click)="openUserLoginDialog()" color="primary">
+      Login
+    </button>
+  </div>
 </div>
