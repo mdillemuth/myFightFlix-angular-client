@@ -36,7 +36,7 @@ export class UserRegistrationService {
         `Error Status code ${error.status}, ` + `Error body is: ${error.error}`
       );
     }
-    return throwError('Something bad happened; please try again later.');
+    return throwError('Registration Error: Please try again');
   }
 }
 
@@ -64,7 +64,7 @@ export class UserLoginService {
         `Error Status code ${error.status}, ` + `Error body is: ${error.error}`
       );
     }
-    return throwError('Something bad happened; please try again later.');
+    return throwError('Login Error: Invalid Credentials');
   }
 }
 

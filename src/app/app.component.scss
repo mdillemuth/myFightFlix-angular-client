@@ -2,22 +2,15 @@
   margin-bottom: 24px;
 }
 
+.navbar__brand {
+  font-size: 24px;
+  font-style: italic;
+}
+
 .navbar__row {
+  margin: 0 auto;
+  max-width: 1200px;
   display: flex;
   justify-content: space-between;
-  padding: 0 32px;
-}
-
-// Tablet
-@media all and (min-width: 768px) {
-  .navbar__row {
-    padding: 0 40px;
-  }
-}
-
-// Desktop
-@media all and (min-width: 1440px) {
-  .navbar__row {
-    padding: 0 165px;
-  }
+  padding: 0 24px;
 }

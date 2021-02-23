@@ -1,5 +1,18 @@
-.registration__container {
-  .registration__header {
-    margin-bottom: 24px;
+.registration__header {
+  margin-bottom: 16px;
+}
+.registration__spinner {
+  margin: 0 auto;
+  margin-bottom: 16px;
+}
+.registration-form__container {
+  display: flex;
+  flex-direction: column;
+}
+
+// Tablet
+@media all and (min-width: 768px) {
+  .registration__card {
+    width: 400px;
   }
 }

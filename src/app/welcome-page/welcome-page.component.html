@@ -1,4 +1,4 @@
-<div class="welcome__container">
+<section class="welcome__container">
   <div class="welcome__title">
     <h1>
       Welcome to
@@ -10,11 +10,17 @@
       mat-raised-button
       (click)="openUserRegistrationDialog()"
       color="primary"
+      aria-label="Sign up button"
     >
       Sign Up
     </button>
-    <button mat-raised-button (click)="openUserLoginDialog()" color="accent">
+    <button
+      mat-stroked-button
+      (click)="openUserLoginDialog()"
+      color="primary"
+      aria-label="Login button"
+    >
       Login
     </button>
   </div>
-</div>
+</section>
