@@ -1,8 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { GetMoviesService } from '../fetch-api-data.service';
+import { Router } from '@angular/router';
+// Services
+import {
+  AddFavoriteMovieService,
+  GetMoviesService,
+} from '../fetch-api-data.service';
+// Material
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Router } from '@angular/router';
+// Components
 import { MovieSynopsisComponent } from '../movie-synopsis/movie-synopsis.component';
 import { MovieDirectorComponent } from '../movie-director/movie-director.component';
 import { MovieGenreComponent } from '../movie-genre/movie-genre.component';
@@ -17,6 +23,7 @@ export class MovieCardComponent implements OnInit {
 
   constructor(
     public fetchApiData: GetMoviesService,
+    public addFavoriteMovie: AddFavoriteMovieService,
     public dialog: MatDialog,
     public snackBar: MatSnackBar,
     private router: Router
@@ -31,6 +38,16 @@ export class MovieCardComponent implements OnInit {
     this.fetchApiData.getAllMovies().subscribe((resp: any) => {
       this.movies = resp;
       return this.movies;
+    });
+  }
+
+  // Adds movie to user's list of favorites
+  onAddFavoriteMovie(id: string): void {
+    this.addFavoriteMovie.addFavorite(id).subscribe((response: any) => {
+      console.log(response);
+      this.snackBar.open('Added to favorites!', 'OK', {
+        duration: 2000,
+      });
     });
   }
 
@@ -52,5 +69,15 @@ export class MovieCardComponent implements OnInit {
     this.dialog.open(MovieGenreComponent, {
       data: { name, description },
     });
+  }
+
+  refresh(): void {
+    this.router.navigate(['/movies']).then(() => {
+      window.location.reload();
+    });
+  }
+
+  logoutUser(): void {
+    localStorage.clear();
   }
 }

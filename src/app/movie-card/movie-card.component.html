@@ -1,7 +1,11 @@
 <div class="movies__container">
   <mat-card *ngFor="let movie of movies" class="movie-card__container">
     <mat-card-header class="movie-card__header">
-      <button mat-icon-button aria-label="Favorite button">
+      <button
+        mat-icon-button
+        aria-label="Adds movie to user's list of favorites"
+        (click)="onAddFavoriteMovie(movie._id)"
+      >
         <mat-icon color="warn">star_border</mat-icon>
       </button>
       <mat-card-title class="movie-card__title">{{
