@@ -3,14 +3,16 @@ import { GetMoviesService } from '../fetch-api-data.service';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { MovieSynopsisComponent } from '../movie-synopsis/movie-synopsis.component';
 
 @Component({
   selector: 'app-movie-card',
   templateUrl: './movie-card.component.html',
   styleUrls: ['./movie-card.component.scss'],
 })
-export class MovieCardComponent {
+export class MovieCardComponent implements OnInit {
   movies: any[] = [];
+
   constructor(
     public fetchApiData: GetMoviesService,
     public dialog: MatDialog,
@@ -22,10 +24,18 @@ export class MovieCardComponent {
     this.getMovies();
   }
 
+  // Fetches all movies from API
   getMovies(): void {
     this.fetchApiData.getAllMovies().subscribe((resp: any) => {
       this.movies = resp;
       return this.movies;
+    });
+  }
+
+  // Modal with movie description
+  openSynopsisDialog(synopsis: string): void {
+    this.dialog.open(MovieSynopsisComponent, {
+      data: { synopsis },
     });
   }
 }

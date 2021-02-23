@@ -13,7 +13,13 @@
     <mat-card-actions class="movie-card__actions-container">
       <button mat-button color="accent">Genre</button>
       <button mat-button color="accent">Director</button>
-      <button mat-button color="accent">Synopsis</button>
+      <button
+        mat-button
+        color="accent"
+        (click)="openSynopsisDialog(movie.Description)"
+      >
+        Synopsis
+      </button>
     </mat-card-actions>
   </mat-card>
 </div>
