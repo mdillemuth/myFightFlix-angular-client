@@ -2,7 +2,7 @@
   <mat-card *ngFor="let movie of movies" class="movie-card__container">
     <mat-card-header class="movie-card__header">
       <button mat-icon-button aria-label="Favorite button">
-        <mat-icon color="warn">star</mat-icon>
+        <mat-icon color="warn">star_border</mat-icon>
       </button>
       <mat-card-title class="movie-card__title">{{
         movie.Title
@@ -11,7 +11,13 @@
     </mat-card-header>
     <img src="{{ movie.ImagePath }}" alt="{{ movie.Title }}" />
     <mat-card-actions class="movie-card__actions-container">
-      <button mat-button color="accent">Genre</button>
+      <button
+        mat-button
+        color="accent"
+        (click)="openGenreDialog(movie.Genre.Name, movie.Genre.Description)"
+      >
+        Genre
+      </button>
       <button
         mat-button
         color="accent"

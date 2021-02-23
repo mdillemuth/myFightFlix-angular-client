@@ -1,8 +1,8 @@
-<div class="director__container">
+<div class="genre__container">
   <mat-toolbar>
-    <mat-toolbar-row class="director__header">
-      <h3 mat-dialog-title class="director__title">
-        {{ data.name }}, born {{ data.birth }}
+    <mat-toolbar-row class="genre__header">
+      <h3 mat-dialog-title class="genre__title">
+        {{ data.name }}
       </h3>
       <button
         mat-icon-button
@@ -14,7 +14,7 @@
       </button>
     </mat-toolbar-row>
   </mat-toolbar>
-  <mat-dialog-content class="director__content">
-    {{ data.bio }}
+  <mat-dialog-content class="genre__content">
+    {{ data.description }}
   </mat-dialog-content>
 </div>
