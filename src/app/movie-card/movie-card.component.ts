@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { MovieSynopsisComponent } from '../movie-synopsis/movie-synopsis.component';
+import { MovieDirectorComponent } from '../movie-director/movie-director.component';
 
 @Component({
   selector: 'app-movie-card',
@@ -36,6 +37,13 @@ export class MovieCardComponent implements OnInit {
   openSynopsisDialog(synopsis: string): void {
     this.dialog.open(MovieSynopsisComponent, {
       data: { synopsis },
+    });
+  }
+
+  // Modal with movie director information
+  openDirectorDialog(name: string, bio: string, birth: string): void {
+    this.dialog.open(MovieDirectorComponent, {
+      data: { name, bio, birth },
     });
   }
 }
