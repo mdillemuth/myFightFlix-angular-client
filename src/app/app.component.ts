@@ -8,6 +8,7 @@ import { FormControl } from '@angular/forms';
 })
 export class AppComponent implements OnInit {
   title = 'myFlix-Angular-client';
+
   toggleTheme = new FormControl(false);
 
   constructor(private _renderer: Renderer2) {}

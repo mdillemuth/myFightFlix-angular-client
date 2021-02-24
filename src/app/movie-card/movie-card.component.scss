@@ -1,6 +1,18 @@
+.sub-navbar__row {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+
+  button {
+    width: 75px;
+    margin: 0 16px;
+  }
+}
+
 .movies__container {
   padding: 0 24px;
   margin: 0 auto;
+  margin-top: 40px;
   max-width: 1350px;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));

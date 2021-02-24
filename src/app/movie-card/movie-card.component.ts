@@ -1,10 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-// Services
-import {
-  AddFavoriteMovieService,
-  GetMoviesService,
-} from '../fetch-api-data.service';
+// Service that contains backend logic
+import { FetchApiDataService } from '../fetch-api-data.service';
 // Material
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -22,8 +19,7 @@ export class MovieCardComponent implements OnInit {
   movies: any[] = [];
 
   constructor(
-    public fetchApiData: GetMoviesService,
-    public addFavoriteMovie: AddFavoriteMovieService,
+    public fetchApiData: FetchApiDataService,
     public dialog: MatDialog,
     public snackBar: MatSnackBar,
     private router: Router
@@ -43,12 +39,17 @@ export class MovieCardComponent implements OnInit {
 
   // Adds movie to user's list of favorites
   onAddFavoriteMovie(id: string): void {
-    this.addFavoriteMovie.addFavorite(id).subscribe((response: any) => {
+    this.fetchApiData.addFavorite(id).subscribe((response: any) => {
       console.log(response);
       this.snackBar.open('Added to favorites!', 'OK', {
         duration: 2000,
       });
     });
+  }
+
+  onLogout(): void {
+    this.fetchApiData.logout();
+    this.router.navigate(['/welcome']);
   }
 
   // Modal with movie description
