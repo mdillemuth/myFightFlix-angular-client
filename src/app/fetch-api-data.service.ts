@@ -17,7 +17,7 @@ const apiUrl = 'https://my-fight-flix.herokuapp.com/api/';
   providedIn: 'root',
 })
 export class FetchApiDataService {
-  private isAuthenticated: boolean = false;
+  private isAuthenticated = false;
   private token: string = '';
 
   constructor(private http: HttpClient, private router: Router) {}
@@ -33,7 +33,7 @@ export class FetchApiDataService {
   }
 
   setAuth() {
-    return (this.isAuthenticated = true);
+    this.isAuthenticated = true;
   }
 
   // Returns username of active session

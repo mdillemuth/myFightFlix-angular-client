@@ -47,38 +47,24 @@ export class MovieCardComponent implements OnInit {
     });
   }
 
-  onLogout(): void {
-    this.fetchApiData.logout();
-    this.router.navigate(['/welcome']);
-  }
-
-  // Modal with movie description
+  // Opens modal with movie synopsis information
   openSynopsisDialog(synopsis: string): void {
     this.dialog.open(MovieSynopsisComponent, {
       data: { synopsis },
     });
   }
 
-  // Modal with movie director information
+  // Opens modal with movie director information
   openDirectorDialog(name: string, bio: string, birth: string): void {
     this.dialog.open(MovieDirectorComponent, {
       data: { name, bio, birth },
     });
   }
 
+  // Opens modal with movie genre information
   openGenreDialog(name: string, description: string): void {
     this.dialog.open(MovieGenreComponent, {
       data: { name, description },
     });
-  }
-
-  refresh(): void {
-    this.router.navigate(['/movies']).then(() => {
-      window.location.reload();
-    });
-  }
-
-  logoutUser(): void {
-    localStorage.clear();
   }
 }

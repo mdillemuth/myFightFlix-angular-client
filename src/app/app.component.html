@@ -11,4 +11,17 @@
     </mat-slide-toggle>
   </mat-toolbar-row>
 </mat-toolbar>
+<!-- Only appears after successful login (i.e. authenticated user) -->
+<div *ngIf="isAuth()">
+  <mat-toolbar class="sub-navbar" role="heading">
+    <mat-toolbar-row class="sub-navbar__row">
+      <button mat-raised-button color="primary" (click)="openProfile()">
+        Profile
+      </button>
+      <button mat-raised-button color="primary" (click)="onLogout()">
+        Logout
+      </button>
+    </mat-toolbar-row>
+  </mat-toolbar>
+</div>
 <router-outlet></router-outlet>

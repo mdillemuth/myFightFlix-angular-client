@@ -9,3 +9,14 @@
   justify-content: space-between;
   padding: 0 24px;
 }
+
+.sub-navbar__row {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+
+  button {
+    width: 75px;
+    margin: 0 16px;
+  }
+}
