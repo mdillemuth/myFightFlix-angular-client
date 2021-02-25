@@ -1,0 +1,54 @@
+.profile__container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.back-to-movies {
+  margin: 24px auto;
+}
+
+.favorite-movies__container {
+  padding: 0 24px;
+  margin: 0 auto;
+  margin-top: 40px;
+  max-width: 1350px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+  align-items: stretch;
+  grid-auto-rows: 500px;
+  grid-auto-flow: dense;
+}
+
+.favoriteMovie-card__header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.favoriteMovie-card__container {
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  img {
+    border-radius: 5px;
+    margin: 0 auto;
+    max-width: 100%;
+    height: 300px;
+
+    object-fit: cover;
+    object-position: top;
+  }
+
+  .favoriteMovie-card__actions-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    button {
+      font-size: 14px;
+    }
+  }
+}

@@ -3,6 +3,9 @@ import { Router } from '@angular/router';
 import { FetchApiDataService } from '../fetch-api-data.service';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MovieSynopsisComponent } from '../movie-synopsis/movie-synopsis.component';
+import { MovieDirectorComponent } from '../movie-director/movie-director.component';
+import { MovieGenreComponent } from '../movie-genre/movie-genre.component';
 
 @Component({
   selector: 'app-user-profile',
@@ -50,5 +53,41 @@ export class UserProfileComponent implements OnInit {
     setTimeout(() => {
       this.getMovies();
     }, 100);
+  }
+
+  // Redirects user back to movies page
+  onReturnToMovies(): void {
+    this.router.navigate(['/movies']);
+  }
+
+  // Adds movie to user's list of favorites
+  onAddFavoriteMovie(id: string): void {
+    this.fetchApiData.addFavorite(id).subscribe((response: any) => {
+      console.log(response);
+      this.snackBar.open('Added to favorites!', 'OK', {
+        duration: 2000,
+      });
+    });
+  }
+
+  // Opens modal with movie synopsis information
+  openSynopsisDialog(synopsis: string): void {
+    this.dialog.open(MovieSynopsisComponent, {
+      data: { synopsis },
+    });
+  }
+
+  // Opens modal with movie director information
+  openDirectorDialog(name: string, bio: string, birth: string): void {
+    this.dialog.open(MovieDirectorComponent, {
+      data: { name, bio, birth },
+    });
+  }
+
+  // Opens modal with movie genre information
+  openGenreDialog(name: string, description: string): void {
+    this.dialog.open(MovieGenreComponent, {
+      data: { name, description },
+    });
   }
 }
