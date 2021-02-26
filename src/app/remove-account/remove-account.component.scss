@@ -1,0 +1,16 @@
+.remove-account__container {
+  width: 280px;
+  height: 250px;
+
+  h3 {
+    text-align: center;
+  }
+}
+
+.remove-account__actions {
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}

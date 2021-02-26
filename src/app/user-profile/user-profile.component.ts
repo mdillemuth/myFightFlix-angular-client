@@ -6,6 +6,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MovieSynopsisComponent } from '../movie-synopsis/movie-synopsis.component';
 import { MovieDirectorComponent } from '../movie-director/movie-director.component';
 import { MovieGenreComponent } from '../movie-genre/movie-genre.component';
+import { RemoveAccountComponent } from '../remove-account/remove-account.component';
 
 @Component({
   selector: 'app-user-profile',
@@ -30,6 +31,12 @@ export class UserProfileComponent implements OnInit {
     this.getFavoriteMovies();
   }
 
+  editUserData(): void {}
+
+  removeAccount(): void {
+    this.dialog.open(RemoveAccountComponent);
+  }
+
   // Fetches all movies to reference favoriteMovieIds with
   getMovies(): void {
     this.fetchApiData.getAllMovies().subscribe((resp: any) => {
@@ -38,7 +45,6 @@ export class UserProfileComponent implements OnInit {
         if (this.favoriteMovieIds.includes(movie._id))
           this.favoriteMovies.push(movie);
       });
-      console.log(this.favoriteMovies);
       return this.favoriteMovies;
     });
   }
@@ -47,7 +53,6 @@ export class UserProfileComponent implements OnInit {
   getFavoriteMovies(): void {
     const user = localStorage.getItem('user');
     this.fetchApiData.getUser(user).subscribe((response: any) => {
-      console.log(response[0].FavoriteMovies);
       this.favoriteMovieIds = response[0].FavoriteMovies;
     });
     setTimeout(() => {
@@ -55,19 +60,24 @@ export class UserProfileComponent implements OnInit {
     }, 100);
   }
 
-  // Redirects user back to movies page
-  onReturnToMovies(): void {
-    this.router.navigate(['/movies']);
-  }
-
-  // Adds movie to user's list of favorites
-  onAddFavoriteMovie(id: string): void {
-    this.fetchApiData.addFavorite(id).subscribe((response: any) => {
-      console.log(response);
-      this.snackBar.open('Added to favorites!', 'OK', {
-        duration: 2000,
+  // Adds or removes movie from user's list of favorites
+  onToggleFavoriteMovie(id: string): any {
+    if (this.favoriteMovieIds.includes(id)) {
+      this.fetchApiData.removeFavorite(id).subscribe((resp: any) => {
+        this.snackBar.open('Removed from favorites!', 'OK', {
+          duration: 2000,
+        });
       });
-    });
+      const index = this.favoriteMovieIds.indexOf(id);
+      return this.favoriteMovieIds.splice(index, 1);
+    } else {
+      this.fetchApiData.addFavorite(id).subscribe((response: any) => {
+        this.snackBar.open('Added to favorites!', 'OK', {
+          duration: 2000,
+        });
+      });
+    }
+    return this.favoriteMovieIds.push(id);
   }
 
   // Opens modal with movie synopsis information

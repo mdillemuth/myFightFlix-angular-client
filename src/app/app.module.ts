@@ -31,6 +31,7 @@ import { MovieSynopsisComponent } from './movie-synopsis/movie-synopsis.componen
 import { MovieDirectorComponent } from './movie-director/movie-director.component';
 import { MovieGenreComponent } from './movie-genre/movie-genre.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
+import { RemoveAccountComponent } from './remove-account/remove-account.component';
 
 const appRoutes: Routes = [
   { path: 'welcome', component: WelcomePageComponent },
@@ -51,6 +52,7 @@ const appRoutes: Routes = [
     MovieSynopsisComponent,
     MovieDirectorComponent,
     MovieGenreComponent,
+    RemoveAccountComponent,
   ],
   imports: [
     RouterModule.forRoot(appRoutes),
