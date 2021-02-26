@@ -1,5 +1,6 @@
 .navbar__brand {
   font-style: italic;
+  cursor: pointer;
 }
 
 .navbar__row {
@@ -8,6 +9,11 @@
   display: flex;
   justify-content: space-between;
   padding: 0 24px;
+}
+
+.navbar-icons__container {
+  display: flex;
+  align-items: center;
 }
 
 .sub-navbar__row {
@@ -19,10 +25,4 @@
     width: 75px;
     margin: 0 16px;
   }
-}
-
-// Custom buttons
-.btn {
-  background-color: #fff;
-  border-color: #b71c1c;
 }

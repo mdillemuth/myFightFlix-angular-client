@@ -51,4 +51,17 @@ export class AppComponent implements OnInit {
   openProfile(): void {
     this.router.navigate(['/profile']);
   }
+
+  // Navbar logo takes logged in user to movies page or welcome page if not logged in
+  backToMain(): void {
+    if (localStorage.getItem('token') !== null) {
+      this.router.navigate(['/movies']);
+    } else {
+      this.router.navigate(['/welcome']);
+    }
+  }
+
+  toMovies(): void {
+    this.router.navigate(['/movies']);
+  }
 }

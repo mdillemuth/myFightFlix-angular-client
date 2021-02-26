@@ -1,27 +1,56 @@
 <mat-toolbar color="primary" class="navbar" role="heading">
   <mat-toolbar-row class="navbar__row">
-    <span class="navbar__brand">myFightFlix</span>
-    <mat-slide-toggle
-      [formControl]="toggleTheme"
-      aria-label="toggles theme between dark and light"
+    <span
+      class="navbar__brand"
+      aria-label="Button that takes user back to main page"
+      (click)="backToMain()"
+      >myFightFlix</span
     >
-      <mat-icon aria-label="toggle theme sun and moon icon"
-        >brightness_medium</mat-icon
+    <div class="navbar-icons__container">
+      <mat-slide-toggle
+        [formControl]="toggleTheme"
+        aria-label="Button that toggles app theme between dark and light"
+        #tooltip="matTooltip"
+        matTooltip="Toggle theme"
+        matTooltipPosition="below"
       >
-    </mat-slide-toggle>
+      </mat-slide-toggle>
+      <span *ngIf="isAuth()">
+        <button
+          mat-icon-button
+          [matMenuTriggerFor]="menu"
+          aria-label="Opens menu with links to profile or logout"
+        >
+          <mat-icon>menu</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+          <button
+            mat-menu-item
+            (click)="toMovies()"
+            aria-label="button that takes user to movies page"
+          >
+            <mat-icon>movie</mat-icon>
+            <span>Movies</span>
+          </button>
+          <button
+            (click)="openProfile()"
+            mat-menu-item
+            aria-label="button that takes user to profile page"
+          >
+            <mat-icon>person_pin</mat-icon>
+            <span>Profile</span>
+          </button>
+          <button
+            mat-menu-item
+            (click)="onLogout()"
+            aria-label="button that logs user out"
+          >
+            <mat-icon>logout</mat-icon>
+            <span>Logout</span>
+          </button>
+        </mat-menu>
+      </span>
+    </div>
   </mat-toolbar-row>
 </mat-toolbar>
-<!-- Only appears after successful login (i.e. authenticated user) -->
-<div *ngIf="isAuth()">
-  <mat-toolbar class="sub-navbar" role="heading">
-    <mat-toolbar-row class="sub-navbar__row">
-      <button mat-raised-button color="primary" (click)="openProfile()">
-        Profile
-      </button>
-      <button mat-raised-button color="accent" (click)="onLogout()">
-        Logout
-      </button>
-    </mat-toolbar-row>
-  </mat-toolbar>
-</div>
 <router-outlet></router-outlet>

@@ -17,6 +17,7 @@ import { MovieGenreComponent } from '../movie-genre/movie-genre.component';
 })
 export class MovieCardComponent implements OnInit {
   movies: any[] = [];
+  favoriteMovieIds: any[] = [];
 
   constructor(
     public fetchApiData: FetchApiDataService,
@@ -27,6 +28,7 @@ export class MovieCardComponent implements OnInit {
 
   ngOnInit(): void {
     this.getMovies();
+    this.getFavoriteMovies();
   }
 
   // Fetches all movies from API
@@ -37,14 +39,32 @@ export class MovieCardComponent implements OnInit {
     });
   }
 
-  // Adds movie to user's list of favorites
-  onAddFavoriteMovie(id: string): void {
-    this.fetchApiData.addFavorite(id).subscribe((response: any) => {
-      console.log(response);
-      this.snackBar.open('Added to favorites!', 'OK', {
-        duration: 2000,
-      });
+  // Used to determine whether or not to fill in star on movie-card
+  getFavoriteMovies(): void {
+    const user = localStorage.getItem('user');
+    this.fetchApiData.getUser(user).subscribe((resp: any) => {
+      this.favoriteMovieIds = resp[0].FavoriteMovies;
     });
+  }
+
+  // Adds or removes movie from user's list of favorites
+  onToggleFavoriteMovie(id: string): any {
+    if (this.favoriteMovieIds.includes(id)) {
+      this.fetchApiData.removeFavorite(id).subscribe((resp: any) => {
+        this.snackBar.open('Removed from favorites!', 'OK', {
+          duration: 2000,
+        });
+      });
+      const index = this.favoriteMovieIds.indexOf(id);
+      return this.favoriteMovieIds.splice(index, 1);
+    } else {
+      this.fetchApiData.addFavorite(id).subscribe((response: any) => {
+        this.snackBar.open('Added to favorites!', 'OK', {
+          duration: 2000,
+        });
+      });
+    }
+    return this.favoriteMovieIds.push(id);
   }
 
   // Opens modal with movie synopsis information

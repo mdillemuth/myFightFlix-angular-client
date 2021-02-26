@@ -2,11 +2,19 @@
   <mat-card *ngFor="let movie of movies" class="movie-card__container">
     <mat-card-header class="movie-card__header">
       <button
+        #tooltip="matTooltip"
+        matTooltip="Toggle favorite movie"
+        matTooltipPosition="above"
         mat-icon-button
         aria-label="Adds movie to user's list of favorites"
-        (click)="onAddFavoriteMovie(movie._id)"
+        (click)="onToggleFavoriteMovie(movie._id)"
       >
-        <mat-icon color="warn">star_border</mat-icon>
+        <mat-icon color="warn">
+          <span *ngIf="favoriteMovieIds.includes(movie._id); else elseBlock"
+            >star</span
+          >
+          <ng-template #elseBlock>star_border</ng-template>
+        </mat-icon>
       </button>
       <mat-card-title class="movie-card__title">{{
         movie.Title
