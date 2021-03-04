@@ -1,4 +1,16 @@
-# MyFightFlixAngularClient
+# myFightFlix - Angular Client
+
+![App showcase gif](/myFightFlix-angular-demo.gif)
+
+## Description
+
+This is a single-page application build using Angular that is connected to the myFightFlix backend. Users are able to create an account and browse their favorite fighting movies. They can modify account information, add or remove movies from their list of favorites, or delete their account.
+
+This app is built using the MEAN stack of technlogies, (MongoDB, Angular, Express.js, Node.js). The app uses Angular Material throughout as well.
+
+A key feature that distinguishes this client from the [React Client](https://github.com/mdillemuth/myFightFlix-react-client/) is that the user is able to toggle between light mode and dark mode with a button on the navigation bar. This was a feature that was easiser to implement by because of Angular's Material and Theming.
+
+## Angular Details
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.1.
 
