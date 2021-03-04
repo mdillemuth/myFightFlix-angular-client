@@ -14,7 +14,7 @@ import { RemoveAccountComponent } from '../remove-account/remove-account.compone
   styleUrls: ['./user-profile.component.scss'],
 })
 export class UserProfileComponent implements OnInit {
-  @Input() userData = { username: '', password: '', email: '', birthday: '' };
+  @Input() userData = { Username: '', Password: '', Email: '', Birthday: '' };
 
   favoriteMovieIds: any[] = [];
   favoriteMovies: any[] = [];
@@ -31,7 +31,29 @@ export class UserProfileComponent implements OnInit {
     this.getFavoriteMovies();
   }
 
-  editUserData(): void {}
+  editUserData(): void {
+    this.fetchApiData.editAccount(this.userData).subscribe(
+      (result) => {
+        localStorage.setItem('user', result.username);
+        this.snackBar.open('Update successful!', 'OK', {
+          duration: 5000,
+        });
+        setTimeout(
+          () =>
+            this.router.navigate(['user']).then(() => {
+              window.location.reload();
+            }),
+          1500
+        );
+      },
+      (result) => {
+        console.log(result);
+        this.snackBar.open(result, 'OK', {
+          duration: 5000,
+        });
+      }
+    );
+  }
 
   removeAccount(): void {
     this.dialog.open(RemoveAccountComponent);
