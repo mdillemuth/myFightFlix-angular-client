@@ -1,9 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-// Contains backend logic for registering new user
 import { FetchApiDataService } from '../fetch-api-data.service';
-// Closes dialog on success
 import { MatDialogRef } from '@angular/material/dialog';
-// Displays notifications
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
@@ -16,6 +13,12 @@ export class UserRegistrationFormComponent implements OnInit {
 
   @Input() userData = { Username: '', Password: '', Email: '', Birthday: '' };
 
+  /**
+   *
+   * @param fetchApiData
+   * @param dialogRef
+   * @param snackBar
+   */
   constructor(
     public fetchApiData: FetchApiDataService,
     public dialogRef: MatDialogRef<UserRegistrationFormComponent>,
@@ -24,7 +27,9 @@ export class UserRegistrationFormComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  // This is the function responsible for sending the form inputs to the backend
+  /**
+   * Handles registering user account by contacting the API
+   */
   registerUser(): void {
     this.isLoading = true;
     this.fetchApiData.createAccount(this.userData).subscribe(

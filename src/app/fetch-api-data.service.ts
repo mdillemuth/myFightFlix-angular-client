@@ -9,10 +9,9 @@ import {
 import { Observable, throwError } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-//Declaring the api url that will provide data for the client app
+// Declaring the api url that will provide data for the client app
 const apiUrl = 'https://my-fight-flix.herokuapp.com/api/';
 
-// Rewrite
 @Injectable({
   providedIn: 'root',
 })
@@ -20,35 +19,57 @@ export class FetchApiDataService {
   private isAuthenticated = false;
   private token: string = '';
 
+  /**
+   *
+   * @param http
+   * @param router
+   */
   constructor(private http: HttpClient, private router: Router) {}
 
-  // Returns token in local storage
+  /**
+   * @returns {string} the token from local storage
+   */
   getToken() {
     return this.token;
   }
 
-  // Returns boolean of whether user is authenticated
+  /**
+   *
+   * @returns {boolean} the authentication status of the user
+   */
   getIsAuth() {
     return this.isAuthenticated;
   }
 
+  /**
+   * Can be called to set user authentication to true
+   */
   setAuth() {
     this.isAuthenticated = true;
   }
 
-  // Returns username of active session
+  /**
+   *
+   * @returns {string} username from local storage
+   */
   getUsername() {
     const username = localStorage.getItem('user');
     return username;
   }
 
-  // Logout
+  /**
+   * Logs out user by removing credentials from local storage
+   */
   logout(): void {
     localStorage.removeItem('user');
     localStorage.removeItem('token');
   }
 
-  // API call to login user
+  /**
+   * Handles user login HTTP request
+   * @param userDetails
+   * @returns
+   */
   login(userDetails: any): Observable<any> {
     this.isAuthenticated = true;
     return this.http
@@ -56,7 +77,11 @@ export class FetchApiDataService {
       .pipe(catchError(this.handleError));
   }
 
-  // API call to get user account information
+  /**
+   * Calls API to get user account information
+   * @param user
+   * @returns
+   */
   getUser(user: any): Observable<any> {
     const token = localStorage.getItem('token');
     return this.http
@@ -68,7 +93,11 @@ export class FetchApiDataService {
       .pipe(map(this.extractResponseData), catchError(this.handleError));
   }
 
-  // API call to register new user account
+  /**
+   * API call to register new user account
+   * @param userDetails
+   * @returns
+   */
   createAccount(userDetails: any): Observable<any> {
     console.log(userDetails);
     return this.http
@@ -76,7 +105,11 @@ export class FetchApiDataService {
       .pipe(catchError(this.handleError));
   }
 
-  // API call to edit user account details
+  /**
+   * API call to edit user account details
+   * @param userDetails
+   * @returns
+   */
   editAccount(userDetails: any): Observable<any> {
     const user = localStorage.getItem('user');
     const token = localStorage.getItem('token');
@@ -89,7 +122,10 @@ export class FetchApiDataService {
       .pipe(map(this.extractResponseData), catchError(this.handleError));
   }
 
-  // API call to remove user's account
+  /**
+   * API call to remove user account
+   * @returns
+   */
   removeAccount(): Observable<any> {
     const user = localStorage.getItem('user');
     const token = localStorage.getItem('token');
@@ -102,7 +138,10 @@ export class FetchApiDataService {
       .pipe(map(this.extractResponseData), catchError(this.handleError));
   }
 
-  // API call to fetch all movies in database
+  /**
+   * API call to fetch all movies in database
+   * @returns
+   */
   getAllMovies(): Observable<any> {
     const token = localStorage.getItem('token');
     return this.http
@@ -114,7 +153,10 @@ export class FetchApiDataService {
       .pipe(map(this.extractResponseData), catchError(this.handleError));
   }
 
-  // API call to get movie by title
+  /**
+   * API call to get movie by title
+   * @returns
+   */
   getSingleMovie(): Observable<any> {
     const token = localStorage.getItem('token');
     return this.http
@@ -126,7 +168,10 @@ export class FetchApiDataService {
       .pipe(map(this.extractResponseData), catchError(this.handleError));
   }
 
-  // API call to get director information
+  /**
+   * API call to get director information
+   * @returns
+   */
   getDirector(): Observable<any> {
     const token = localStorage.getItem('token');
     return this.http
@@ -138,7 +183,10 @@ export class FetchApiDataService {
       .pipe(map(this.extractResponseData), catchError(this.handleError));
   }
 
-  // API call to get genre information
+  /**
+   * API call to get genre information
+   * @returns
+   */
   getGenre(): Observable<any> {
     const token = localStorage.getItem('token');
     return this.http
@@ -150,7 +198,11 @@ export class FetchApiDataService {
       .pipe(map(this.extractResponseData), catchError(this.handleError));
   }
 
-  // API call to add movie to user's list of favorites
+  /**
+   * API call to add movie to user's list of favorites
+   * @param id
+   * @returns
+   */
   addFavorite(id: string): Observable<any> {
     const token = localStorage.getItem('token');
     const username = localStorage.getItem('user');
@@ -163,7 +215,11 @@ export class FetchApiDataService {
       .pipe(map(this.extractResponseData), catchError(this.handleError));
   }
 
-  // API call to remove movie from user's list of favorites
+  /**
+   * API call to remove movie from user's list of favorites
+   * @param id
+   * @returns
+   */
   removeFavorite(id: string): Observable<any> {
     const token = localStorage.getItem('token');
     const username = localStorage.getItem('user');
@@ -176,13 +232,21 @@ export class FetchApiDataService {
       .pipe(map(this.extractResponseData), catchError(this.handleError));
   }
 
-  // Non-Typed Response Extraction
+  /**
+   * Non-Typed Response Extraction
+   * @param res
+   * @returns
+   */
   extractResponseData(res: Response | Object): Response | Object {
     const body = res;
     return body || {};
   }
 
-  // Error Handling
+  /**
+   * Handles errors
+   * @param error
+   * @returns
+   */
   handleError(error: HttpErrorResponse): any {
     if (error.error instanceof ErrorEvent) {
       console.error('Some error occurred:', error.error.message);

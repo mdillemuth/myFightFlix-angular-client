@@ -1,11 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
-// Contains backend logic for logging in a user
 import { FetchApiDataService } from '../fetch-api-data.service';
-// Closes dialog on success
 import { MatDialogRef } from '@angular/material/dialog';
-// Displays notifications
 import { MatSnackBar } from '@angular/material/snack-bar';
-// Routing
 import { Router } from '@angular/router';
 
 @Component({
@@ -18,6 +14,13 @@ export class UserLoginFormComponent implements OnInit {
 
   @Input() userData = { Username: '', Password: '' };
 
+  /**
+   *
+   * @param fetchApiData
+   * @param dialogRef
+   * @param snackBar
+   * @param router
+   */
   constructor(
     public fetchApiData: FetchApiDataService,
     public dialogRef: MatDialogRef<UserLoginFormComponent>,
@@ -27,7 +30,9 @@ export class UserLoginFormComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  // This is the function responsible for sending the form inputs to the backend
+  /**
+   * This is the function responsible for sending the form inputs to the backend
+   */
   userLogin(): void {
     this.isLoading = true;
     this.fetchApiData.login(this.userData).subscribe(

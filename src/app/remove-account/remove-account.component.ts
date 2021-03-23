@@ -9,6 +9,11 @@ import { Router } from '@angular/router';
   styleUrls: ['./remove-account.component.scss'],
 })
 export class RemoveAccountComponent implements OnInit {
+  /**
+   * @param fetchApiData
+   * @param snackBar
+   * @param router
+   */
   constructor(
     public fetchApiData: FetchApiDataService,
     public snackBar: MatSnackBar,
@@ -17,7 +22,9 @@ export class RemoveAccountComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  // When user confirms account deletion
+  /**
+   * When user confirms account deletion
+   */
   removeUserAccount(): void {
     this.fetchApiData.removeAccount().subscribe(
       (resp: any) => {
@@ -44,7 +51,9 @@ export class RemoveAccountComponent implements OnInit {
     );
   }
 
-  // When user does not confirm account deletion
+  /**
+   * When user does not confirm account deletion
+   */
   cancel(): void {
     this.router.navigate(['/profile']).then(() => {
       window.location.reload();

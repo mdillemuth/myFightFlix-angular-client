@@ -20,6 +20,12 @@ export class UserProfileComponent implements OnInit {
   favoriteMovies: any[] = [];
   movies: any[] = [];
 
+  /**
+   * @param fetchApiData
+   * @param dialog
+   * @param snackBar
+   * @param router
+   */
   constructor(
     public fetchApiData: FetchApiDataService,
     public dialog: MatDialog,
@@ -31,6 +37,9 @@ export class UserProfileComponent implements OnInit {
     this.getFavoriteMovies();
   }
 
+  /**
+   * Handles form submission when user edits account information
+   */
   editUserData(): void {
     this.fetchApiData.editAccount(this.userData).subscribe(
       (result) => {
@@ -55,11 +64,16 @@ export class UserProfileComponent implements OnInit {
     );
   }
 
+  /**
+   * Directs user to RemoveAccountComponent when they opt to delete account
+   */
   removeAccount(): void {
     this.dialog.open(RemoveAccountComponent);
   }
 
-  // Fetches all movies to reference favoriteMovieIds with
+  /**
+   * Fetches all movies to reference favoriteMovieIds with
+   */
   getMovies(): void {
     this.fetchApiData.getAllMovies().subscribe((resp: any) => {
       this.movies = resp;
@@ -71,7 +85,9 @@ export class UserProfileComponent implements OnInit {
     });
   }
 
-  // Fetches favorite movies from user's profile information
+  /**
+   * Fetches favorite movies from user's profile information
+   */
   getFavoriteMovies(): void {
     const user = localStorage.getItem('user');
     this.fetchApiData.getUser(user).subscribe((response: any) => {
@@ -82,7 +98,11 @@ export class UserProfileComponent implements OnInit {
     }, 100);
   }
 
-  // Adds or removes movie from user's list of favorites
+  /**
+   * Adds or removes movie from user's list of favorites
+   * @param id
+   * @returns
+   */
   onToggleFavoriteMovie(id: string): any {
     if (this.favoriteMovieIds.includes(id)) {
       this.fetchApiData.removeFavorite(id).subscribe((resp: any) => {
@@ -102,21 +122,33 @@ export class UserProfileComponent implements OnInit {
     return this.favoriteMovieIds.push(id);
   }
 
-  // Opens modal with movie synopsis information
+  /**
+   * Opens modal with movie synopsis information
+   * @param synopsis
+   */
   openSynopsisDialog(synopsis: string): void {
     this.dialog.open(MovieSynopsisComponent, {
       data: { synopsis },
     });
   }
 
-  // Opens modal with movie director information
+  /**
+   * Opens modal with movie director information
+   * @param name
+   * @param bio
+   * @param birth
+   */
   openDirectorDialog(name: string, bio: string, birth: string): void {
     this.dialog.open(MovieDirectorComponent, {
       data: { name, bio, birth },
     });
   }
 
-  // Opens modal with movie genre information
+  /**
+   * Opens modal with movie genre information
+   * @param name
+   * @param description
+   */
   openGenreDialog(name: string, description: string): void {
     this.dialog.open(MovieGenreComponent, {
       data: { name, description },
